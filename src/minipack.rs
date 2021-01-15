@@ -26,6 +26,8 @@ const PICKUP_DISTANCE: f32 = 1.5;
 const STARTING_FOLLOW_DISTANCE: f32 = 2.;
 const FOLLOW_DISTANCE_INCR: f32 = 1.;
 
+const MAX_MOVING_DROP_COUNT: u8 = 15;
+
 const SERVER_UPDATE_INTERVAL: f32 = 0.1;
 
 #[derive(Copy, Clone)]
@@ -74,6 +76,10 @@ pub struct MiniPack {
 	owner: Option<u8>,
 	is_moving: bool,
 
+	moving_drop_count: u8,
+
+	anim_time_count: f32,
+
 	trailing_player_distance: f32,
 
 	interpolation: InterpolationHelper<PosYawValue>
@@ -105,6 +111,8 @@ impl MiniPacks {
 				members: Vec::new(),
 				owner: None,
 				is_moving: false,
+				moving_drop_count: 0,
+				anim_time_count: 0.,
 				interpolation: InterpolationHelper::new(),
 				trailing_player_distance: STARTING_FOLLOW_DISTANCE
 			};
@@ -150,6 +158,9 @@ impl MiniPacks {
 						yaw: pack_update.yaw
 					});
 					pack.owner = pack_update.owner;
+					if !pack.is_moving && pack_update.is_moving {
+						pack.anim_time_count = 0.;
+					}
 					pack.is_moving = pack_update.is_moving;
 				}
 			}
@@ -188,6 +199,13 @@ impl MiniPack {
 
 		let own_pack_counts = *player_pack_counts.entry(pid).or_insert(0);
 
+		if self.is_moving {
+			self.moving_drop_count += 1;
+			if self.moving_drop_count > MAX_MOVING_DROP_COUNT {
+				self.is_moving = false;
+			}
+		}
+
 		match self.owner {
 			Some(owner_id) => {
 				let other_pack_counts = *player_pack_counts.entry(owner_id).or_insert(0);
@@ -200,6 +218,8 @@ impl MiniPack {
 						}
 						self.position.0 += mve[0];
 						self.position.1 += mve[2];
+						self.is_moving = true;
+						self.moving_drop_count = 0;
 					}
 				} else {
 					if own_pack_counts > other_pack_counts {
@@ -247,12 +267,20 @@ impl MiniPack {
 			member.draw_info.rotation[1] = self.yaw + if owner.is_some() { 0. } else { member.standing_yaw };
 			member.draw_info.generate_matrix();
 		}
+
+		self.anim_time_count += time_delta;
 	}
 
 	pub fn draw(&self, target: &mut Frame, env_info: &EnvDrawInfo, program: &Program, wolf_anim: &ObjAnimation, wolf_standing: &BTreeMap<String, ObjDef>) {
 		for member in &self.members {
-			for obj in wolf_standing.values() {
-				basic_render(target, env_info, &member.draw_info, obj, program, None);
+			if !self.is_moving {
+				for obj in wolf_standing.values() {
+					basic_render(target, env_info, &member.draw_info, obj, program, None);
+				}
+			} else {
+				for o in wolf_anim.get_keyframe(self.anim_time_count).values() {
+					basic_render(target, env_info, &member.draw_info, &o, program, None);
+				}
 			}
 		}
 	}
