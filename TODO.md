@@ -1,0 +1,5 @@
+- pack messages
+  - owner update upon change
+  - correct member counts for packs upon join/catchup
+  - position/yaw/is_moving update every tick
+- 

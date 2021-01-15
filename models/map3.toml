@@ -1,0 +1,4 @@
+[lights."light_0_Cube.003"]
+att_quad = 0.01
+att_linear = 0.0
+att_constant = 0.0
