@@ -1,5 +1,6 @@
-- pack messages
-  - owner update upon change
-  - correct member counts for packs upon join/catchup
-  - position/yaw/is_moving update every tick
-- 
+- game stages
+  - warmup
+  - timed session, respawn characters at single spawn with random variance +/- 1.5 units
+  - end of game, center leaderboard
+- work on map(s)
+- ui is last
