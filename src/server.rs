@@ -1,6 +1,5 @@
 use cubik::server::ServerContainer;
 use cubik::player::{Player, PlayerControlType};
-use cubik::quadoctree::{QuadOctreeNode, BoundingBox};
 use cubik::map::GameMap;
 use crate::msg::AppMessage;
 use crate::constants::{APP_ID, PORT};
@@ -9,20 +8,17 @@ use std::time::{Duration, Instant};
 use std::thread::sleep;
 use std::collections::HashMap;
 
+const MAX_PLAYERS: usize = 6;
+
 pub fn start_server() {
-	let mut server_container: ServerContainer<AppMessage> = ServerContainer::new(PORT, 10).unwrap();
+	let mut server_container: ServerContainer<AppMessage> = ServerContainer::new(PORT, MAX_PLAYERS).unwrap();
 
 	println!("server listening on port {}", PORT);
 
 	let mut last_status_update = Instant::now();
 	let mut player_map: HashMap<u8, Player> = HashMap::new();
 
-	let quadoctree = QuadOctreeNode::new_tree(BoundingBox {
-		start_pos: [-25., -25., -25.],
-		end_pos: [25., 25., 25.]
-	}, false);
-
-	let mut map = GameMap::load_map("models/map3", APP_ID, None, None, Some(quadoctree)).unwrap();
+	let mut map = GameMap::load_map("models/map3", APP_ID, None, None, true).unwrap();
 	let mut packs = MiniPacks::create_from_map(&mut map);
 	let mut player_pack_counts: HashMap<u8, usize> = HashMap::new();
 

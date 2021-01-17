@@ -9,12 +9,14 @@ use cubik::peer_player::PeerPlayer;
 use crate::constants::{APP_ID, PORT};
 use cubik::audio::{buffer_sound, get_sound_stream, SoundStream};
 use cubik::container::RenderContainer;
-use cubik::quadoctree::{QuadOctreeNode, BoundingBox};
+use cubik::math::mult_vector;
 use std::collections::HashMap;
 use cubik::client::ClientContainer;
 use cubik::map::GameMap;
 use crate::msg::AppMessage;
+use crate::leaderboard::Leaderboard;
 use crate::minipack::MiniPacks;
+use crate::constants::player_color;
 
 fn net_update(client_container: &mut ClientContainer<AppMessage>, peer_map: &mut HashMap<u8, PeerPlayer>,
 	player: &mut Player, sound_stream: &SoundStream, packs: &mut MiniPacks, time_delta: f32) {
@@ -30,7 +32,11 @@ fn net_update(client_container: &mut ClientContainer<AppMessage>, peer_map: &mut
 					player.update(0., None, Some(sound_stream), Some(msg));
 				} else {
 					let peer_player = peer_map.entry(player_id)
-						.or_insert(PeerPlayer::new());
+						.or_insert_with(|| {
+							let mut r = PeerPlayer::new();
+							r.obj_draw_info.color = mult_vector(player_color(player_id), 10.);
+							r
+						});
 
 					peer_player.update(Some(msg), time_delta);
 				}
@@ -53,7 +59,7 @@ fn net_update(client_container: &mut ClientContainer<AppMessage>, peer_map: &mut
 	}
 }
 
-pub fn start_client(fullscreen: bool) {
+pub fn start_client(fullscreen: bool, host: String, username: String) {
 	let event_loop = glutin::event_loop::EventLoop::new();
 	let mut ctr = RenderContainer::new(&event_loop, 1280, 720, "Wolf Pack", fullscreen);
 
@@ -61,6 +67,7 @@ pub fn start_client(fullscreen: bool) {
 		position: [0.0, 0.0, 0.0f32],
 		rotation: [0.0, 0.0, 0.0f32],
 		scale: [1.0, 1.0, 1.0],
+		color: [1.0, 1.0, 1.0],
 		model_mat: None 
 	};
 	map_info.generate_matrix();
@@ -69,18 +76,14 @@ pub fn start_client(fullscreen: bool) {
 
 	let mut peer_map: HashMap<u8, PeerPlayer> = HashMap::new();
 
-	let mut client_container: ClientContainer<AppMessage> = ClientContainer::new(format!("127.0.0.1:{}", PORT).as_str()).unwrap();
+	let mut client_container: ClientContainer<AppMessage> = ClientContainer::new(format!("{}:{}", host, PORT).as_str()).unwrap();
+	client_container.state_name(username).unwrap();
 	let mut player = Player::new([0.0, 1.5, 0.0], PlayerControlType::MultiplayerClient,
 		[0.0, 0.275, 0.0], [0.44, 0.275, 0.08]);
 
 	player.walking_sound = Some(buffer_sound("./audio/running.wav", APP_ID).unwrap());
 
-	let quadoctree = QuadOctreeNode::new_tree(BoundingBox {
-		start_pos: [-25., -25., -25.],
-		end_pos: [25., 25., 25.]
-	}, false);
-	
-	let mut map = GameMap::load_map("models/map3", APP_ID, Some(&ctr.display), Some(&mut ctr.textures), Some(quadoctree)).unwrap();
+	let mut map = GameMap::load_map("models/map3", APP_ID, Some(&ctr.display), Some(&mut ctr.textures), true).unwrap();
 
 	let mut packs = MiniPacks::create_from_map(&mut map);
 
@@ -89,6 +92,9 @@ pub fn start_client(fullscreen: bool) {
 	let wolf_anim = ObjAnimation::load_wavefront("models/wolfrunning", APP_ID, &ctr.display, &mut ctr.textures, 0.041).unwrap();
 
 	let skybox = Skybox::new(&ctr.display, "skybox1", APP_ID, 512, 50.).unwrap();
+
+	let mut player_pack_counts: HashMap<u8, usize> = HashMap::new();
+	let mut leaderboard = Leaderboard::new(&ctr.display).unwrap();
 
 	let mut lights_arr: [Light; MAX_LIGHTS] = Default::default();
 	let mut light_iter = map.lights.values();
@@ -153,8 +159,12 @@ pub fn start_client(fullscreen: bool) {
 
 		net_update(&mut client_container, &mut peer_map, &mut player, &sound_stream, &mut packs, time_delta);
 
+		player_pack_counts.clear();
 		for pack in &mut packs.packs {
 			pack.client_update(map.quadoctree.as_ref().unwrap(), time_delta);
+			if let Some(pid) = pack.owner {
+				player_pack_counts.insert(pid, player_pack_counts.get(&pid).unwrap_or(&0) + 1);
+			}
 		}
 
 		let mut target = ctr.display.draw();
@@ -176,7 +186,8 @@ pub fn start_client(fullscreen: bool) {
 		}
 
 		for peer_player in peer_map.values_mut() {
-			peer_player.draw(&mut target, &env_info, &ctr.main_program, &wolf_anim, &wolf_standing, wolf_anim.get_keyframe_by_index(5));
+			peer_player.draw(&mut target, &env_info, &ctr.main_program, &wolf_anim, 
+				&wolf_standing, wolf_anim.get_keyframe_by_index(5));
 		}
 
 		for pack in &packs.packs {
@@ -184,6 +195,9 @@ pub fn start_client(fullscreen: bool) {
 		}
 
 		skybox.draw(&mut target, &env_info, &ctr.skybox_program);
+
+		leaderboard.draw(&mut target, &ctr.display, &ctr.ui_program, &client_container.peers,
+			&player_pack_counts).unwrap();
 
 		target.finish().unwrap();
 	});

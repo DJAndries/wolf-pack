@@ -2,3 +2,7 @@
 att_quad = 0.01
 att_linear = 0.0
 att_constant = 0.0
+
+[quadoctree]
+start_pos = [ -45.0, -45.0, -45.0 ]
+end_pos = [ 45.0, 45.0, 45.0 ]

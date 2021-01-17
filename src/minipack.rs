@@ -8,15 +8,14 @@ use cubik::draw::{ObjDrawInfo, EnvDrawInfo, ObjDef, basic_render};
 use cubik::math::{vector_length, add_vector, normalize_vector, mult_vector};
 use cubik::cube::generate_cube_collideobj;
 use cubik::interpolation::{Interpolate, InterpolationHelper};
-use cubik::peer_player::PeerPlayer;
 use crate::msg::AppMessage;
+use crate::constants::player_color;
 use std::collections::{BTreeMap, HashMap};
 use rand::Rng;
 use serde::{Serialize, Deserialize};
 
 const SPAWN_PREFIX: &str = "misc_minipack_spawn_";
-const MIN_PACK_SIZE: usize = 5;
-const MAX_PACK_SIZE: usize = 5;
+pub const PACK_SIZE: usize = 5;
 const POSITION_VARIANCE: f32 = 1.;
 const YAW_VARIANCE: f32 = 2.;
 const MIN_MEMBER_DISTANCE: f32 = 0.3;
@@ -73,7 +72,7 @@ pub struct MiniPack {
 	position: (f32, f32),
 	yaw: f32,
 	members: Vec<PackMember>,
-	owner: Option<u8>,
+	pub owner: Option<u8>,
 	is_moving: bool,
 
 	moving_drop_count: u8,
@@ -104,7 +103,6 @@ impl MiniPacks {
 		let spawn_keys: Vec<String> = map.misc_objs.keys().filter(|k| k.starts_with(SPAWN_PREFIX)).cloned().collect();
 		for spawn_key in spawn_keys {
 			let obj = map.misc_objs.get(&spawn_key).unwrap();
-			let member_count = rng.gen_range(MIN_PACK_SIZE..=MAX_PACK_SIZE);
 			let mut new_pack = MiniPack {
 				position: (obj[0], obj[2]),
 				yaw: rng.gen_range(0.0..(std::f32::consts::PI * 2.)),
@@ -116,7 +114,7 @@ impl MiniPacks {
 				interpolation: InterpolationHelper::new(),
 				trailing_player_distance: STARTING_FOLLOW_DISTANCE
 			};
-			for _ in 0..member_count {
+			for _ in 0..PACK_SIZE {
 				let mut member = PackMember {
 					standing_yaw: rng.gen_range(0.0..YAW_VARIANCE),
 					..Default::default()
@@ -153,7 +151,7 @@ impl MiniPacks {
 			let mut packs_iter = self.packs.iter_mut();
 			for pack_update in &pack_updates {
 				if let Some(pack) = packs_iter.next() {
-					pack.interpolation.post_update(PosYawValue{
+					pack.interpolation.post_update(PosYawValue {
 						pos: pack_update.position,
 						yaw: pack_update.yaw
 					});
@@ -222,7 +220,7 @@ impl MiniPack {
 						self.moving_drop_count = 0;
 					}
 				} else {
-					if own_pack_counts > other_pack_counts {
+					if distance < PICKUP_DISTANCE && own_pack_counts > other_pack_counts {
 						self.owner = Some(pid);
 						player_pack_counts.insert(pid, own_pack_counts + 1);
 						player_pack_counts.insert(owner_id, own_pack_counts - 1);
@@ -251,6 +249,9 @@ impl MiniPack {
 		for member in &mut self.members {
 			member.draw_info.position[0] = member.pos_offset.0 + self.position.0;
 			member.draw_info.position[2] = member.pos_offset.1 + self.position.1;
+			if let Some(pid) = owner {
+				member.draw_info.color = *player_color(*pid);
+			}
 
 			'f: for _ in 0..15 {
 				let collide_obj = generate_cube_collideobj(&[0., 0.5, 0.], &member.draw_info.position, &[0.5, 0.5, 0.5], 0.);
@@ -260,6 +261,9 @@ impl MiniPack {
 						member.draw_info.position = add_vector(&resolve, &member.draw_info.position, 1.);
 						break 'f;
 					}
+				}
+				if let Some(triangle_resolve) = collide_result.triangle {
+					member.draw_info.position = triangle_resolve;
 				}
 				member.draw_info.position[1] -= COLLIDE_CHECK_DECR;
 			}
