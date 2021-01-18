@@ -19,7 +19,7 @@ impl LeaderboardEntry {
 		let mut text = FontText::new(
 			format!("{}: {}", peer.name.as_ref().unwrap(), (player_pack_count * PACK_SIZE).to_string()),
 			TEXT_SIZE,
-			(1.7, 0.85 - (vertical_step as f32 * TEXT_SIZE)),
+			Self::gen_position(vertical_step),
 			TextAlign::Right
 		);
 		let color = mult_vector(player_color(pid), 0.9);
@@ -29,6 +29,16 @@ impl LeaderboardEntry {
 			count: player_pack_count,
 			vertical_step: vertical_step
 		}
+	}
+
+	fn update_position(&mut self, vertical_step: usize) {
+		self.vertical_step = vertical_step;
+		self.text.ui_draw_info.position = Self::gen_position(vertical_step);
+		self.text.ui_draw_info.screen_dim = (0, 0);
+	}
+
+	fn gen_position(vertical_step: usize) -> (f32, f32) {
+		(1.7, 0.85 - (vertical_step as f32 * TEXT_SIZE))
 	}
 }
 
@@ -49,20 +59,31 @@ impl Leaderboard {
 			self.entries.clear();
 		}
 
-		let mut len = self.entries.len();
+		let mut sorted_pids: Vec<u8> = peers.keys().cloned().collect();
+		sorted_pids.sort_by(|a, b| {
+			player_pack_counts.get(b).unwrap_or(&0).cmp(&player_pack_counts.get(a).unwrap_or(&0))
+		});
 
-		for (id, peer) in peers {
-			let player_pack_count = player_pack_counts.get(id).unwrap_or(&0);
+		let mut vertical_step = 0;
+		for pid in sorted_pids {
+			if let Some(peer) = peers.get(&pid) {
+				let player_pack_count = player_pack_counts.get(&pid).unwrap_or(&0);
 
-			if peer.name.is_none() { continue; }
-			
-			let vertical_step = if let Some(existing) = self.entries.get(id) {
-				if existing.count == *player_pack_count { continue; }
-				existing.vertical_step
-			} else { len };
+				if peer.name.is_none() { continue; }
+				
+				if let Some(existing) = self.entries.get_mut(&pid) {
+					if existing.count == *player_pack_count {
+						if existing.vertical_step != vertical_step {
+							existing.update_position(vertical_step);
+						}
+						vertical_step += 1;
+						continue;
+					}
+				}
 
-			if self.entries.insert(*id, LeaderboardEntry::new(*id, peer, *player_pack_count, vertical_step)).is_none() {
-				len += 1;
+				self.entries.insert(pid, LeaderboardEntry::new(pid, peer, *player_pack_count, vertical_step));
+
+				vertical_step += 1;
 			}
 		}
 
