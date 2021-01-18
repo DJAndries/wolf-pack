@@ -16,7 +16,7 @@ use serde::{Serialize, Deserialize};
 
 const SPAWN_PREFIX: &str = "misc_minipack_spawn_";
 pub const PACK_SIZE: usize = 5;
-const POSITION_VARIANCE: f32 = 1.;
+const POSITION_VARIANCE: f32 = 1.25;
 const YAW_VARIANCE: f32 = 2.;
 const MIN_MEMBER_DISTANCE: f32 = 0.3;
 const COLLIDE_CHECK_DECR: f32 = 0.002;
