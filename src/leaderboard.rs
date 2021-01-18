@@ -2,12 +2,10 @@ use cubik::fonts::{LoadedFont, FontText, FontError, TextAlign};
 use cubik::glium::{Display, Program, Frame};
 use cubik::client::PeerMeta;
 use cubik::math::mult_vector;
-use crate::constants::APP_ID;
 use crate::minipack::PACK_SIZE;
 use crate::constants::player_color;
 use std::collections::HashMap;
 
-const FONT_SIZE: f32 = 80.;
 const TEXT_SIZE: f32 = 0.125;
 
 struct LeaderboardEntry {
@@ -35,19 +33,17 @@ impl LeaderboardEntry {
 }
 
 pub struct Leaderboard {
-	font: LoadedFont,
 	entries: HashMap<u8, LeaderboardEntry>
 }
 
 impl Leaderboard {
-	pub fn new(display: &Display) -> Result<Self, FontError> {
-		Ok(Self {
-			font: LoadedFont::load(display, "fonts/Quebab-Shadow-ffp.otf", APP_ID, FONT_SIZE)?,
+	pub fn new() -> Self {
+		Self {
 			entries: HashMap::new()
-		})
+		}
 	}
 
-	pub fn draw(&mut self, target: &mut Frame, display: &Display, program: &Program,
+	pub fn draw(&mut self, target: &mut Frame, display: &Display, program: &Program, font: &LoadedFont,
 		peers: &HashMap<u8, PeerMeta>, player_pack_counts: &HashMap<u8, usize>) -> Result<(), FontError> {
 		if peers.len() < self.entries.len() {
 			self.entries.clear();
@@ -71,7 +67,7 @@ impl Leaderboard {
 		}
 
 		for entry in self.entries.values_mut() {
-			entry.text.draw(target, display, program, &self.font)?;
+			entry.text.draw(target, display, program, font)?;
 		}
 
 		Ok(())

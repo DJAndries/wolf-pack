@@ -10,6 +10,7 @@ use crate::constants::{APP_ID, PORT};
 use cubik::audio::{buffer_sound, get_sound_stream, SoundStream};
 use cubik::container::RenderContainer;
 use cubik::math::mult_vector;
+use cubik::fonts::LoadedFont;
 use std::collections::HashMap;
 use cubik::client::ClientContainer;
 use cubik::map::GameMap;
@@ -17,9 +18,13 @@ use crate::msg::AppMessage;
 use crate::leaderboard::Leaderboard;
 use crate::minipack::MiniPacks;
 use crate::constants::player_color;
+use crate::stage::GameStageManager;
+
+const FONT_SIZE: f32 = 80.;
 
 fn net_update(client_container: &mut ClientContainer<AppMessage>, peer_map: &mut HashMap<u8, PeerPlayer>,
-	player: &mut Player, sound_stream: &SoundStream, packs: &mut MiniPacks, time_delta: f32) {
+	player: &mut Player, sound_stream: &SoundStream, packs: &mut MiniPacks, map: &GameMap,
+	game_stage_manager: &mut GameStageManager, time_delta: f32) {
 	let pids = client_container.pids();
 	peer_map.retain(|&k, _| pids.contains(&k));
 
@@ -43,6 +48,9 @@ fn net_update(client_container: &mut ClientContainer<AppMessage>, peer_map: &mut
 			},
 			AppMessage::PackUpdate(_) => {
 				packs.client_update_msg(msg);
+			},
+			AppMessage::StageChange(update) => {
+				game_stage_manager.client_update(update, map, packs);
 			}
 		}
 	}
@@ -74,6 +82,8 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 
 	let sound_stream = get_sound_stream().unwrap();
 
+	let main_font = LoadedFont::load(&ctr.display, "fonts/Quebab-Shadow-ffp.otf", APP_ID, FONT_SIZE).unwrap();
+
 	let mut peer_map: HashMap<u8, PeerPlayer> = HashMap::new();
 
 	let mut client_container: ClientContainer<AppMessage> = ClientContainer::new(format!("{}:{}", host, PORT).as_str()).unwrap();
@@ -83,9 +93,9 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 
 	player.walking_sound = Some(buffer_sound("./audio/running.wav", APP_ID).unwrap());
 
-	let mut map = GameMap::load_map("models/map3", APP_ID, Some(&ctr.display), Some(&mut ctr.textures), true).unwrap();
+	let map = GameMap::load_map("models/map3", APP_ID, Some(&ctr.display), Some(&mut ctr.textures), true).unwrap();
 
-	let mut packs = MiniPacks::create_from_map(&mut map);
+	let mut packs = MiniPacks::new();
 
 	let wolf_standing = cubik::wavefront::load_obj("models/wolf_standing.obj", APP_ID, Some(&ctr.display), Some(&mut ctr.textures),
 		&[1., 1., 1.], None, None, None).unwrap();
@@ -94,7 +104,7 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 	let skybox = Skybox::new(&ctr.display, "skybox1", APP_ID, 512, 50.).unwrap();
 
 	let mut player_pack_counts: HashMap<u8, usize> = HashMap::new();
-	let mut leaderboard = Leaderboard::new(&ctr.display).unwrap();
+	let mut leaderboard = Leaderboard::new();
 
 	let mut lights_arr: [Light; MAX_LIGHTS] = Default::default();
 	let mut light_iter = map.lights.values();
@@ -103,6 +113,8 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 	let mut last_frame_time = std::time::Instant::now();
 
 	let mut input_enabled = true;
+
+	let mut game_stage_manager = GameStageManager::new();
 
 	event_loop.run(move |ev, _, control_flow| {
 		let listeners: Vec<&mut dyn InputListener> = vec![&mut player];
@@ -157,7 +169,8 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 		let time_delta = new_frame_time.duration_since(last_frame_time).as_secs_f32();
 		last_frame_time = new_frame_time;
 
-		net_update(&mut client_container, &mut peer_map, &mut player, &sound_stream, &mut packs, time_delta);
+		net_update(&mut client_container, &mut peer_map, &mut player,
+			&sound_stream, &mut packs, &map, &mut game_stage_manager, time_delta);
 
 		player_pack_counts.clear();
 		for pack in &mut packs.packs {
@@ -196,8 +209,10 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 
 		skybox.draw(&mut target, &env_info, &ctr.skybox_program);
 
-		leaderboard.draw(&mut target, &ctr.display, &ctr.ui_program, &client_container.peers,
+		leaderboard.draw(&mut target, &ctr.display, &ctr.ui_program, &main_font, &client_container.peers,
 			&player_pack_counts).unwrap();
+
+		game_stage_manager.draw(&mut target, &ctr.display, &ctr.ui_program, &main_font).unwrap();
 
 		target.finish().unwrap();
 	});

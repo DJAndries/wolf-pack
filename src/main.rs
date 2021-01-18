@@ -4,6 +4,7 @@ mod msg;
 mod constants;
 mod minipack;
 mod leaderboard;
+mod stage;
 
 use std::env;
 

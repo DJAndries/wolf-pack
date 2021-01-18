@@ -4,6 +4,7 @@ use cubik::map::GameMap;
 use crate::msg::AppMessage;
 use crate::constants::{APP_ID, PORT};
 use crate::minipack::MiniPacks;
+use crate::stage::GameStageManager;
 use std::time::{Duration, Instant};
 use std::thread::sleep;
 use std::collections::HashMap;
@@ -18,11 +19,13 @@ pub fn start_server() {
 	let mut last_status_update = Instant::now();
 	let mut player_map: HashMap<u8, Player> = HashMap::new();
 
-	let mut map = GameMap::load_map("models/map3", APP_ID, None, None, true).unwrap();
-	let mut packs = MiniPacks::create_from_map(&mut map);
+	let map = GameMap::load_map("models/map3", APP_ID, None, None, true).unwrap();
+	let mut packs = MiniPacks::new();
 	let mut player_pack_counts: HashMap<u8, usize> = HashMap::new();
 
 	let mut last_time = Instant::now();
+
+	let mut game_stage_manager = GameStageManager::new();
 
 	loop {
 		server_container.update();
@@ -54,6 +57,11 @@ pub fn start_server() {
 					pack.player_server_update(pid, &player, &mut player_pack_counts);
 				}
 			}
+		}
+
+		if let Some(msg) = game_stage_manager.server_update(&map, &mut player_map,
+			&mut packs, &mut player_pack_counts) {
+			server_container.broadcast(msg);
 		}
 
 		if let Some(msg) = packs.server_update_msg(last_time.elapsed().as_secs_f32()) {

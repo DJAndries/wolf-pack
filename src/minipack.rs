@@ -93,12 +93,14 @@ pub struct MiniPackUpdate {
 }
 
 impl MiniPacks {
-	pub fn create_from_map(map: &mut GameMap) -> MiniPacks {
-		let mut result = MiniPacks {
+	pub fn new() -> Self {
+		Self {
 			packs: Vec::new(),
 			net_update_time_count: 0.
-		};
-		
+		}
+	}
+
+	pub fn spawn(&mut self, map: &GameMap) {
 		let mut rng = rand::thread_rng();
 		let spawn_keys: Vec<String> = map.misc_objs.keys().filter(|k| k.starts_with(SPAWN_PREFIX)).cloned().collect();
 		for spawn_key in spawn_keys {
@@ -138,12 +140,8 @@ impl MiniPacks {
 				}
 				new_pack.members.push(member);
 			}
-			result.packs.push(new_pack);
-
-			map.misc_objs.remove(&spawn_key);
+			self.packs.push(new_pack);
 		}
-
-		result
 	}
 
 	pub fn client_update_msg(&mut self, msg: AppMessage) {
@@ -209,7 +207,7 @@ impl MiniPack {
 				let other_pack_counts = *player_pack_counts.entry(owner_id).or_insert(0);
 				if owner_id == pid {
 					if distance > self.trailing_player_distance {
-						let mve = mult_vector(&diff, (distance - self.trailing_player_distance) / distance);
+						let mve = mult_vector(&diff, (distance - self.trailing_player_distance + 0.05) / distance);
 						self.yaw = (mve[2] / mve[0]).atan();
 						if mve[0] < 0. {
 							self.yaw -= std::f32::consts::PI;
