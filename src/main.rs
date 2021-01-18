@@ -13,6 +13,7 @@ fn main() {
 		server::start_server();
 	} else {
 		let mut fullscreen = true;
+		let mut fps_count_enabled = false;
 		let mut host = "127.0.0.1".to_string();
 		let mut username = "Player".to_string();
 
@@ -28,6 +29,9 @@ fn main() {
 				if arg == "--windowed" {
 					fullscreen = false;
 				}
+				if arg == "--fps" {
+					fps_count_enabled = true;
+				}
 			} else {
 				if !host_specified {
 					host = arg;
@@ -38,6 +42,6 @@ fn main() {
 			}
 		}
 		
-		client::start_client(fullscreen, host, username);
+		client::start_client(fullscreen, host, username, fps_count_enabled);
 	}
 }

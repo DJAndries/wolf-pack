@@ -8,6 +8,7 @@ use cubik::player::{Player, PlayerControlType};
 use cubik::peer_player::PeerPlayer;
 use crate::constants::{APP_ID, PORT};
 use cubik::audio::{buffer_sound, get_sound_stream, SoundStream};
+use cubik::fps_count::DebugFPSCounter;
 use cubik::container::RenderContainer;
 use cubik::math::mult_vector;
 use cubik::fonts::LoadedFont;
@@ -67,7 +68,7 @@ fn net_update(client_container: &mut ClientContainer<AppMessage>, peer_map: &mut
 	}
 }
 
-pub fn start_client(fullscreen: bool, host: String, username: String) {
+pub fn start_client(fullscreen: bool, host: String, username: String, fps_count_enabled: bool) {
 	let event_loop = glutin::event_loop::EventLoop::new();
 	let mut ctr = RenderContainer::new(&event_loop, 1280, 720, "Wolf Pack", fullscreen);
 
@@ -115,6 +116,8 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 	let mut input_enabled = true;
 
 	let mut game_stage_manager = GameStageManager::new();
+
+	let mut fps_count = DebugFPSCounter::new(fps_count_enabled);
 
 	event_loop.run(move |ev, _, control_flow| {
 		let listeners: Vec<&mut dyn InputListener> = vec![&mut player];
@@ -215,5 +218,7 @@ pub fn start_client(fullscreen: bool, host: String, username: String) {
 		game_stage_manager.draw(&mut target, &ctr.display, &ctr.ui_program, &main_font).unwrap();
 
 		target.finish().unwrap();
+
+		fps_count.update();
 	});
 }

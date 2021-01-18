@@ -8,8 +8,10 @@ use crate::stage::GameStageManager;
 use std::time::{Duration, Instant};
 use std::thread::sleep;
 use std::collections::HashMap;
+use rand::Rng;
 
 const MAX_PLAYERS: usize = 6;
+const SPAWN_VARIANCE: f32 = 2.;
 
 pub fn start_server() {
 	let mut server_container: ServerContainer<AppMessage> = ServerContainer::new(PORT, MAX_PLAYERS).unwrap();
@@ -27,6 +29,8 @@ pub fn start_server() {
 
 	let mut game_stage_manager = GameStageManager::new();
 
+	let mut rng = rand::thread_rng();
+
 	loop {
 		server_container.update();
 
@@ -36,7 +40,11 @@ pub fn start_server() {
 		for pid in current_pids {
 			let player = player_map.entry(pid)
 				.or_insert_with(|| {
-					let mut player = Player::new([0., 1.5, 0.], PlayerControlType::MultiplayerServer,
+					let init_pos = (
+						rng.gen_range(-SPAWN_VARIANCE..SPAWN_VARIANCE),
+						rng.gen_range(-SPAWN_VARIANCE..SPAWN_VARIANCE)
+					);
+					let mut player = Player::new([init_pos.0, 0.5, init_pos.1], PlayerControlType::MultiplayerServer,
 						[-0.28, 0.275, 0.0], [0.44, 0.275, 0.08]);
 					player.move_rate = 2.56;
 					player

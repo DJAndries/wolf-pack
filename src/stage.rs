@@ -132,7 +132,7 @@ impl GameStageManager {
 				}
 				self.current_stage = GameStage::Warmup;
 				self.text = Some(FontText::new(format!("Warmup {}", Self::format_time(time_remaining as usize)),
-					WARMUP_TEXT_SIZE, (0.0, 0.3), TextAlign::Center));
+					WARMUP_TEXT_SIZE, (0., 0.3), TextAlign::Center));
 			},
 			GameStageUpdate::InProgress { time_remaining } => {
 				if packs.packs.is_empty() {
@@ -140,14 +140,15 @@ impl GameStageManager {
 				}
 				self.current_stage = GameStage::InProgress;
 				self.text = Some(FontText::new(Self::format_time(time_remaining as usize), MAIN_TEXT_SIZE,
-					(0.0, 0.1), TextAlign::Center));
+					(0., 0.83), TextAlign::Center));
 			},
 			GameStageUpdate::Finished => {
 				self.current_stage = GameStage::Finished;
 				self.text = Some(FontText::new("Game Over".to_string(), MAIN_TEXT_SIZE,
-					(0.0, 0.35), TextAlign::Center));
+					(0., 0.1), TextAlign::Center));
 			}
 		};
+		self.text.as_mut().unwrap().ui_draw_info.color = [1.0, 0.25, 0.25, 1.0];
 	}
 
 	pub fn draw(&mut self, target: &mut Frame, display: &Display, program: &Program,
