@@ -2481,6 +2481,7 @@ name = "wolf-pack"
 version = "0.1.0"
 dependencies = [
  "cubik",
+ "derive_more",
  "rand",
  "serde",
 ]

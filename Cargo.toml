@@ -10,6 +10,7 @@ edition = "2018"
 cubik = { path = "../cubik", version = "0.1" }
 serde = { version = "*", features = ["derive"] }
 rand = "*"
+derive_more = "*"
 
 [profile.dev]
 opt-level = 2
