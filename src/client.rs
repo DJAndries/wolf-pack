@@ -2,21 +2,45 @@ use cubik::input::{InputListener, process_input_event, center_cursor};
 use cubik::container::RenderContainer;
 use cubik::glium::glutin::event_loop::{EventLoop, ControlFlow};
 use cubik::glium::glutin::event::{Event, WindowEvent, VirtualKeyCode, ElementState, StartCause};
-use crate::game_client::GameClient;
+use crate::game_client::{GameClient, GameClientError};
+use crate::menu::{MainMenu, MainMenuResult};
 
-pub fn start_client(fullscreen: bool, host: String, username: String, fps_count_enabled: bool, input_switcher_enabled: bool) {
+fn new_game(ctr: &mut RenderContainer, menu: &mut MainMenu, host: String, name: String, fps_count_enabled: bool) -> Option<GameClient> {
+	match GameClient::init(ctr, host, name, fps_count_enabled) {
+		Ok(new_client) => {
+			center_cursor(&ctr.display, false);
+			return Some(new_client);
+		},
+		Err(e) => {
+			if let GameClientError::NetClientError(_) = e {
+				eprintln!("{:?}", e);
+				menu.show_info_dialog("Failed to connect to server.".to_string());
+			} else {
+				panic!("{:?}", e);
+			}
+		}
+	};
+	None
+}
+
+pub fn start_client(fullscreen: bool, host: Option<String>, username: Option<String>, fps_count_enabled: bool, input_switcher_enabled: bool) {
 	let event_loop = EventLoop::new();
 	let mut ctr = RenderContainer::new(&event_loop, 1280, 720, "Wolf Pack", fullscreen);
 
 	let mut input_enabled = true;
 
-	let mut game_client = Some(GameClient::init(&mut ctr, host, username, fps_count_enabled).unwrap());
+	let mut menu = MainMenu::new(&ctr.display).unwrap();
+	let mut game_client: Option<GameClient> = if host.is_some() && username.is_some() {
+		new_game(&mut ctr, &mut menu, host.unwrap(), username.unwrap(), fps_count_enabled)
+	} else {
+		None
+	};
 
 	event_loop.run(move |ev, _, control_flow| {
 		let listeners: Vec<&mut dyn InputListener> = if let Some(game_client) = game_client.as_mut() {
 			vec![&mut game_client.player]
 		} else {
-			Vec::new()
+			vec![&mut menu]
 		};
 
 		*control_flow = ControlFlow::Poll;
@@ -58,7 +82,7 @@ pub fn start_client(fullscreen: bool, host: String, username: String, fps_count_
 			Event::NewEvents(cause) => match cause {
 				StartCause::ResumeTimeReached { .. } => (),
 				StartCause::Init => {
-					center_cursor(&ctr.display, false);
+					center_cursor(&ctr.display, game_client.is_none());
 				},
 				StartCause::Poll => (),
 				_ => return
@@ -68,11 +92,31 @@ pub fn start_client(fullscreen: bool, host: String, username: String, fps_count_
 
 		let mut target = ctr.display.draw();
 
-		if let Some(game_client) = game_client.as_mut() {
-			game_client.update(&mut target, &ctr).unwrap();
-			// if let Err(e) = game_client.update(&mut target, &ctr) {
-			// }
-		}
+		match game_client.as_mut() {
+			None => {
+				// Main menu is shown
+				if let Some(menu_result) = menu.draw(&mut target, &ctr).unwrap() {
+					match menu_result {
+						MainMenuResult::Start { host, name } => {
+							game_client = new_game(&mut ctr, &mut menu, host, name, fps_count_enabled);
+						},
+						MainMenuResult::Quit => *control_flow = ControlFlow::Exit
+					};
+				}
+			},
+			Some(g_client) => {
+				// Game in progress
+				if let Err(e) = g_client.update(&mut target, &ctr) {
+					if let GameClientError::NetClientError(_) = e {
+						center_cursor(&ctr.display, true);
+						menu.show_info_dialog("Lost connection to server.".to_string());
+						game_client = None;
+					} else {
+						panic!("{:?}", e);
+					}
+				}
+			}
+		};
 
 		target.finish().unwrap();
 	});

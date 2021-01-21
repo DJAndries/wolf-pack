@@ -6,6 +6,7 @@ mod constants;
 mod minipack;
 mod leaderboard;
 mod stage;
+mod menu;
 
 use std::env;
 
@@ -16,11 +17,10 @@ fn main() {
 		let mut fullscreen = true;
 		let mut fps_count_enabled = false;
 		let mut input_switcher_enabled = false;
-		let mut host = "127.0.0.1".to_string();
-		let mut username = "Player".to_string();
+		let mut host: Option<String> = None;
+		let mut username: Option<String> = None;
 
 		let mut path_consumed = false;
-		let mut host_specified = false;
 
 		for arg in env::args() {
 			if !path_consumed {
@@ -38,11 +38,10 @@ fn main() {
 					input_switcher_enabled = true;
 				}
 			} else {
-				if !host_specified {
-					host = arg;
-					host_specified = true;
+				if host.is_none() {
+					host = Some(arg);
 				} else {
-					username = arg;		
+					username = Some(arg);
 				}
 			}
 		}
