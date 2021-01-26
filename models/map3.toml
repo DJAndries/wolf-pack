@@ -3,6 +3,21 @@ att_quad = 0.01
 att_linear = 0.0
 att_constant = 0.0
 
+[lights."light_0.001_Cube.034"]
+att_quad = 0.01
+att_linear = 0.0
+att_constant = 0.0
+
+[lights."light_0.002_Cube.035"]
+att_quad = 0.01
+att_linear = 0.0
+att_constant = 0.0
+
+[lights."light_0.003_Cube.036"]
+att_quad = 0.01
+att_linear = 0.0
+att_constant = 0.0
+
 [quadoctree]
 start_pos = [ -45.0, -45.0, -45.0 ]
 end_pos = [ 45.0, 45.0, 45.0 ]

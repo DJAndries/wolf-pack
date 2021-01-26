@@ -9,9 +9,9 @@ use cubik::glium::{Display, Program, Frame};
 use serde::{Serialize, Deserialize};
 
 const WARMUP_SECONDS: usize = 5;
-const GAME_SECONDS: usize = 60;
+const GAME_SECONDS: usize = 120;
 const FINISH_SECONDS: usize = 12;
-const EARLY_FINISH_SECONDS: usize = 30;
+const EARLY_FINISH_SECONDS: usize = 120;
 
 const WARMUP_TEXT_SIZE: f32 = 0.11;
 const MAIN_TEXT_SIZE: f32 = 0.15;
@@ -106,11 +106,16 @@ impl GameStageManager {
 			},
 			GameStage::Finished => {
 				if elapsed_secs >= FINISH_SECONDS {
-					self.current_stage = GameStage::Warmup;
 					self.stage_start_time = Instant::now();
 					packs.packs.clear();
 					player_pack_counts.clear();
-					Some(GameStageUpdate::Warmup { time_remaining: WARMUP_SECONDS as u8 })
+					if !player_map.is_empty() {
+						self.current_stage = GameStage::Warmup;
+						Some(GameStageUpdate::Warmup { time_remaining: WARMUP_SECONDS as u8 })
+					} else {
+						self.current_stage = GameStage::Standby;
+						None
+					}
 				} else {
 					None
 				}

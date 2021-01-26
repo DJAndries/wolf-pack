@@ -69,7 +69,7 @@ pub struct MiniPacks {
 }
 
 pub struct MiniPack {
-	position: (f32, f32),
+	pub position: (f32, f32),
 	yaw: f32,
 	members: Vec<PackMember>,
 	pub owner: Option<u8>,

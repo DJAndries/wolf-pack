@@ -196,6 +196,9 @@ impl GameClient {
 		}
 
 		for pack in &self.packs.packs {
+			if cubik::math::vector_length(&cubik::math::add_vector(&self.player.camera.position, &[pack.position.0, 0., pack.position.1], -1.)) > 25. {
+				continue;
+			}
 			pack.draw(target, &env_info, &ctr.main_program, &self.wolf_anim, &self.wolf_standing);
 		}
 

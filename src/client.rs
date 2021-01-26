@@ -3,7 +3,8 @@ use cubik::container::RenderContainer;
 use cubik::glium::glutin::event_loop::{EventLoop, ControlFlow};
 use cubik::glium::glutin::event::{Event, WindowEvent, VirtualKeyCode, ElementState, StartCause};
 use crate::game_client::{GameClient, GameClientError};
-use crate::menu::{MainMenu, MainMenuResult};
+use crate::menu::{MainMenu, MenuResult};
+use crate::settings::Settings;
 
 fn new_game(ctr: &mut RenderContainer, menu: &mut MainMenu, host: String, name: String, fps_count_enabled: bool) -> Option<GameClient> {
 	match GameClient::init(ctr, host, name, fps_count_enabled) {
@@ -24,12 +25,15 @@ fn new_game(ctr: &mut RenderContainer, menu: &mut MainMenu, host: String, name: 
 }
 
 pub fn start_client(fullscreen: bool, host: Option<String>, username: Option<String>, fps_count_enabled: bool, input_switcher_enabled: bool) {
+	let mut settings = Settings::load().unwrap();
+
 	let event_loop = EventLoop::new();
-	let mut ctr = RenderContainer::new(&event_loop, 1280, 720, "Wolf Pack", fullscreen);
+	let mut ctr = RenderContainer::new(&event_loop, settings.resolution[0], settings.resolution[1],
+		"Wolf Pack", if !fullscreen { false } else { !settings.windowed });
 
 	let mut input_enabled = true;
 
-	let mut menu = MainMenu::new(&ctr.display).unwrap();
+	let mut menu = MainMenu::new(&ctr.display, settings).unwrap();
 	let mut game_client: Option<GameClient> = if host.is_some() && username.is_some() {
 		new_game(&mut ctr, &mut menu, host.unwrap(), username.unwrap(), fps_count_enabled)
 	} else {
@@ -97,10 +101,15 @@ pub fn start_client(fullscreen: bool, host: Option<String>, username: Option<Str
 				// Main menu is shown
 				if let Some(menu_result) = menu.draw(&mut target, &ctr).unwrap() {
 					match menu_result {
-						MainMenuResult::Start { host, name } => {
+						MenuResult::Start { host, name } => {
 							game_client = new_game(&mut ctr, &mut menu, host, name, fps_count_enabled);
 						},
-						MainMenuResult::Quit => *control_flow = ControlFlow::Exit
+						MenuResult::SettingsChange(new_settings) => {
+							settings = new_settings;
+							settings.save().unwrap();
+							ctr.update_size_and_mode(settings.resolution[0], settings.resolution[1], !settings.windowed);
+						},
+						MenuResult::Quit => *control_flow = ControlFlow::Exit
 					};
 				}
 			},

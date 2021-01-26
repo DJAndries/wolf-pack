@@ -11,6 +11,8 @@ cubik = { path = "../cubik", version = "0.1" }
 serde = { version = "*", features = ["derive"] }
 rand = "*"
 derive_more = "*"
+dirs = "*"
+toml = "*"
 
 [profile.dev]
 opt-level = 2

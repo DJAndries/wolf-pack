@@ -7,6 +7,7 @@ mod minipack;
 mod leaderboard;
 mod stage;
 mod menu;
+mod settings;
 
 use std::env;
 
