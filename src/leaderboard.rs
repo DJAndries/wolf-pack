@@ -38,7 +38,7 @@ impl LeaderboardEntry {
 	}
 
 	fn gen_position(vertical_step: usize) -> (f32, f32) {
-		(1.7, 0.85 - (vertical_step as f32 * TEXT_SIZE))
+		(1.75, 0.85 - (vertical_step as f32 * TEXT_SIZE))
 	}
 }
 

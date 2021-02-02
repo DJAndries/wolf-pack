@@ -98,7 +98,7 @@ impl GameClient {
 			player: player,
 			map: map,
 			packs: MiniPacks::new(),
-			skybox: Skybox::new(&ctr.display, "skybox1", APP_ID, 512, 50.)?,
+			skybox: Skybox::new(&ctr.display, "skybox1", APP_ID, 512, 100.)?,
 
 			lights_arr: lights_arr,
 			player_pack_counts: HashMap::new(),
@@ -196,7 +196,7 @@ impl GameClient {
 		}
 
 		for pack in &self.packs.packs {
-			if cubik::math::vector_length(&cubik::math::add_vector(&self.player.camera.position, &[pack.position.0, 0., pack.position.1], -1.)) > 25. {
+			if cubik::math::vector_length(&cubik::math::add_vector(&self.player.camera.position, &[pack.position.0, 0., pack.position.1], -1.)) > 65. {
 				continue;
 			}
 			pack.draw(target, &env_info, &ctr.main_program, &self.wolf_anim, &self.wolf_standing);

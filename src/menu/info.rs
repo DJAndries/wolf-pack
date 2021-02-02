@@ -17,16 +17,16 @@ pub struct InfoDialog {
 impl InfoDialog {
 	pub fn new(display: &Display) -> Result<Self, UIError> {
 		Ok(Self {
-			bg: ImageBackground::new(display, "./textures/dialog_lite.png", APP_ID, (0., -0.17), (1.3, 0.74))?,
-			title: FontText::new("Info".to_string(), 0.07, (-0.6, 0.15), TextAlign::Left),
-			content: FontText::new("".to_string(), 0.07, (0., -0.165), TextAlign::Center),
-			ok_btn: TextButton::new("OK".to_string(), 0.065, (0.5, -0.44), (0.10, 0.05), NORMAL_COLOR, HOVER_COLOR),
+			bg: ImageBackground::new(display, "./textures/dialog_lite.png", APP_ID, (0., 0.), (1.3, 0.74))?,
+			title: FontText::new("Info".to_string(), 0.07, (-0.6, 0.27), TextAlign::Left),
+			content: FontText::new("".to_string(), 0.07, (0., 0.), TextAlign::Center),
+			ok_btn: TextButton::new("OK".to_string(), 0.065, (0.5, -0.3), (0.10, 0.05), NORMAL_COLOR, HOVER_COLOR),
 			enabled: false
 		})
 	}
 
 	pub fn update_content(&mut self, content: String) {
-		self.content = FontText::new(content, 0.07, (0., -0.165), TextAlign::Center);
+		self.content = FontText::new(content, 0.07, (0., 0.), TextAlign::Center);
 	}
 
 	pub fn draw(&mut self, target: &mut Frame, display: &Display, ui_program: &glium::Program, font: &LoadedFont) -> Result<(), UIError> {

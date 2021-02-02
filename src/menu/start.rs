@@ -22,15 +22,15 @@ pub struct StartDialog {
 impl StartDialog {
 	pub fn new(display: &Display) -> Result<Self, UIError> {
 		Ok(Self {
-			bg: ImageBackground::new(display, "./textures/dialog.png", APP_ID, (0., -0.17), (1.0, 0.74))?,
-			start_btn: TextButton::new("Join".to_string(), 0.065, (0.35, -0.44), (0.10, 0.05), NORMAL_COLOR, HOVER_COLOR),
+			bg: ImageBackground::new(display, "./textures/dialog.png", APP_ID, (0., 0.), (1.0, 0.74))?,
+			start_btn: TextButton::new("Join".to_string(), 0.065, (0.35, -0.3), (0.10, 0.05), NORMAL_COLOR, HOVER_COLOR),
 
-			cancel_btn: TextButton::new("Cancel".to_string(), 0.065, (0.15, -0.44), (0.10, 0.05), NORMAL_COLOR, HOVER_COLOR),
-			host_input: TextInput::new((-0.42, -0.285), (0.85, 0.08), WHITE),
-			name_input: TextInput::new((-0.42, -0.085), (0.85, 0.08), WHITE),
-			title: FontText::new("Join Game".to_string(), 0.07, (-0.45, 0.15), TextAlign::Left),
-			name_label: FontText::new("Name:".to_string(), 0.065, (-0.44, 0.03), TextAlign::Left),
-			host_label: FontText::new("Server IP Address:".to_string(), 0.065, (-0.44, -0.165), TextAlign::Left),
+			cancel_btn: TextButton::new("Cancel".to_string(), 0.065, (0.15, -0.3), (0.10, 0.05), NORMAL_COLOR, HOVER_COLOR),
+			host_input: TextInput::new((-0.42, -0.16), (0.85, 0.08), WHITE),
+			name_input: TextInput::new((-0.42, 0.042), (0.85, 0.08), WHITE),
+			title: FontText::new("Join Game".to_string(), 0.07, (-0.45, 0.28), TextAlign::Left),
+			name_label: FontText::new("Name:".to_string(), 0.065, (-0.44, 0.18), TextAlign::Left),
+			host_label: FontText::new("Server IP Address:".to_string(), 0.065, (-0.44, -0.03), TextAlign::Left),
 			enabled: false,
 			result: None
 		})

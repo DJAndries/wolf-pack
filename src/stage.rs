@@ -8,7 +8,7 @@ use std::time::Instant;
 use cubik::glium::{Display, Program, Frame};
 use serde::{Serialize, Deserialize};
 
-const WARMUP_SECONDS: usize = 5;
+const WARMUP_SECONDS: usize = 15;
 const GAME_SECONDS: usize = 120;
 const FINISH_SECONDS: usize = 12;
 const EARLY_FINISH_SECONDS: usize = 120;

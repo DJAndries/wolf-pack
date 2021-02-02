@@ -26,12 +26,18 @@ pub struct SettingsDialog {
 
 impl SettingsDialog {
 	pub fn new(display: &Display, settings: Settings) -> Result<Self, UIError> {
+		let selected_resolution_enum = RESOLUTION_OPTIONS.iter().enumerate().find(|x| &settings.resolution == x.1);
+		let selected_resolution_index = if let Some(selected_resolution_enum) = selected_resolution_enum {
+			selected_resolution_enum.0
+		} else {
+			0
+		};
 		Ok(Self {
 			settings: settings,
 			bg: ImageBackground::new(display, "./textures/dialog_lite.png", APP_ID, (0., 0.), (1.3, 0.84))?,
 			title: FontText::new("Settings".to_string(), 0.07, (-0.6, 0.32), TextAlign::Left),
 			resolution_label: FontText::new("Resolution:".to_string(), 0.07, (-0.5, 0.132), TextAlign::Left),
-			selected_resolution_index: 0,
+			selected_resolution_index: selected_resolution_index,
 			selected_resolution_label: Self::create_resolution_label(settings.resolution),
 			res_left_select_btn: ImageButton::new(
 				ImageBackground::new(display, "./textures/left_arrow.png", APP_ID, (-0.5, 0.05), (0.1, 0.1))?,
