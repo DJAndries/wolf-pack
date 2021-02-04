@@ -8,20 +8,26 @@ use crate::stage::GameStageManager;
 use std::time::{Duration, Instant};
 use std::thread::sleep;
 use std::collections::HashMap;
-use rand::Rng;
 
 const MAX_PLAYERS: usize = 6;
-const SPAWN_VARIANCE: f32 = 2.;
+const SPAWN_PREFIX: &str = "misc_player_spawn_";
 
 pub fn start_server() {
 	let mut server_container: ServerContainer<AppMessage> = ServerContainer::new(PORT, MAX_PLAYERS).unwrap();
 
 	println!("server listening on port {}", PORT);
-
 	let mut last_status_update = Instant::now();
 	let mut player_map: HashMap<u8, Player> = HashMap::new();
 
 	let map = GameMap::load_map("models/map3", APP_ID, None, None, true).unwrap();
+	let player_spawns: Vec<[f32; 3]> = map.misc_objs.iter().filter_map(|(k, v)| {
+		if k.starts_with(SPAWN_PREFIX) {
+			Some(*v)
+		} else {
+			None
+		}
+	}).collect();
+	let mut pid_to_spawn_map: HashMap<u8, [f32; 3]> = HashMap::new();
 	let mut packs = MiniPacks::new();
 	let mut player_pack_counts: HashMap<u8, usize> = HashMap::new();
 
@@ -29,22 +35,32 @@ pub fn start_server() {
 
 	let mut game_stage_manager = GameStageManager::new();
 
-	let mut rng = rand::thread_rng();
-
 	loop {
 		server_container.update();
 
 		let current_pids = server_container.pids();
-		player_map.retain(|&k, _| current_pids.contains(&k));
+		player_map.retain(|&k, _| {
+			if !current_pids.contains(&k) {
+				player_pack_counts.remove(&k);
+				pid_to_spawn_map.remove(&k);
+				false
+			} else {
+				true
+			}
+		});
 
 		for pid in current_pids {
 			let player = player_map.entry(pid)
 				.or_insert_with(|| {
-					let init_pos = (
-						rng.gen_range(-SPAWN_VARIANCE..SPAWN_VARIANCE),
-						rng.gen_range(-SPAWN_VARIANCE..SPAWN_VARIANCE)
-					);
-					let mut player = Player::new([init_pos.0, 0.5, init_pos.1], PlayerControlType::MultiplayerServer,
+					let spawn: [f32; 3] = *player_spawns.iter().find(|s| {
+						if !pid_to_spawn_map.values().any(|v| v == *s) {
+							pid_to_spawn_map.insert(pid, **s);
+							true
+						} else {
+							false
+						}
+					}).unwrap_or(player_spawns.get(0).unwrap());
+					let mut player = Player::new(spawn, PlayerControlType::MultiplayerServer,
 						[-0.28, 0.275, 0.0], [0.44, 0.275, 0.08]);
 					player.move_rate = 2.56;
 					player
