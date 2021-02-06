@@ -23,6 +23,7 @@ jobs:
         with:
           repository: 'djandries/cubik'
           path: 'cubik'
+          branch: 'master'
       - name: Cache
         uses: actions/cache@v2
         with:
