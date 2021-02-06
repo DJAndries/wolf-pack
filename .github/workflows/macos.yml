@@ -16,15 +16,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Checkout code
+        with:
+          path: 'wolf-pack'
       - uses: actions/checkout@v2
         name: Checkout cubik
         with:
           repository: 'djandries/cubik'
-          path: '../cubik'
+          path: 'cubik'
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: target
+          path: 'wolf-pack/target'
           key: mac-build
       - name: Build
         run: cargo build
+        working-directory: 'wolf-pack'
