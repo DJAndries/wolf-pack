@@ -1,0 +1,30 @@
+name: Rust MacOS
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+  steps:
+  - uses: actions/checkout@v2
+    name: Checkout code
+  - uses: actions/checkout@v2
+    name: Checkout cubik
+    with:
+      repository: 'https://github.com/djandries/cubik'
+      path: '../cubik'
+  - name: Cache
+    uses: actions/cache@v2
+    with:
+      path: target
+      key: mac-build
+  - name: Build
+    run: cargo build
