@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
         name: Checkout cubik
         with:
-          repository: 'https://github.com/djandries/cubik'
+          repository: 'djandries/cubik'
           path: '../cubik'
       - name: Cache
         uses: actions/cache@v2
