@@ -28,8 +28,10 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: 'wolf-pack/target'
-          key: mac-build
+          path: |
+            wolf-pack/target
+            ~/.cargo/registry
+          key: ${{ runner.os }}-cargo
       - name: Build
         run: cargo build
         working-directory: 'wolf-pack'
