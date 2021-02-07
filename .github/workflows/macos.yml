@@ -24,6 +24,7 @@ jobs:
           repository: 'djandries/cubik'
           path: 'cubik'
           ref: 'master'
+          token: ${{ secrets.PAT }}
       - name: Cache
         uses: actions/cache@v2
         with:
