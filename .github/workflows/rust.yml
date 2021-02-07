@@ -28,13 +28,16 @@ jobs:
           path: 'cubik'
           ref: 'master'
           token: ${{ secrets.PAT }}
+      - name: Install alsa lib
+        run: sudo apt-get install libasound2-dev
+        if: ${{ matrix-os == 'ubuntu-latest' }}
       - name: Cache
         uses: actions/cache@v2
         with:
           path: |
             wolf-pack/target
             ~/.cargo/registry
-          key: ${{ runner.os }}-cargo
+          key: ${{ matrix.os }}-cargo
       - name: Build
         run: cargo build
         working-directory: 'wolf-pack'
