@@ -1,3 +1,8 @@
+- app icon
+- cargo bundle
+- hide terminal in windows
+- add version/publisher metadata for windows
+
 - work on map(s)
   - chain of maps, just like on pacman
 - github actions
