@@ -1,34 +1,32 @@
 name: Wolf Pack / Rust
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [ created ]
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  create_release:
-    runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-    steps:
-      - uses: actions/create-release@v1
-        name: Create release
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: true
-          prerelease: false
+#   create_release:
+#     runs-on: ubuntu-latest
+#     outputs:
+#       upload_url: ${{ steps.create_release.outputs.upload_url }}
+#     steps:
+#       - uses: actions/create-release@v1
+#         name: Create release
+#         id: create_release
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           tag_name: ${{ github.ref }}
+#           release_name: Release ${{ github.ref }}
+#           draft: true
+#           prerelease: false
     
   build:
     runs-on: ${{ matrix.os }}
-    needs: create_release
+#     needs: create_release
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
@@ -60,11 +58,12 @@ jobs:
         working-directory: 'wolf-pack'
       - name: Upload Release Asset
         id: upload-release-asset 
+        if: ${{ matrix.os == 'windows-latest' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          upload_url: ${{ github.event.release.release.upload_url }}
           asset_path: ./wolf-pack/target/release/WolfPack-Install.exe
           asset_name: WolfPack-${{ github.ref }}-Install.exe
           asset_content_type: application/vnd.microsoft.portable-executable
