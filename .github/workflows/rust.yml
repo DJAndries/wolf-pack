@@ -37,7 +37,7 @@ jobs:
             ~/.cargo/registry
           key: ${{ matrix.os }}-cargo
       - name: Build
-        run: cargo build
+        run: cargo build --release
         working-directory: 'wolf-pack'
       - name: Make Windows installer
         run: makensis /DVERSION=${{ github.event.release.tag_name }} install\win.nsi
