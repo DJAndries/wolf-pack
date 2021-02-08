@@ -78,6 +78,7 @@ Section "Wolf Pack" SecMain
 
 	File /r /x *.blend "..\models"
 	File /r "..\textures"
+	File /r "..\fonts"
 	File /r "..\audio"
 	File "..\LICENSE"
 	File "/oname=$InstDir\wolf-pack.exe" "..\target\release\wolf-pack.exe"
