@@ -41,7 +41,7 @@ jobs:
         working-directory: 'wolf-pack'
       - name: Make Windows installer
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: makensis /DVERSION=${{ github.event.release.tag_name }} install\win.nsi
         working-directory: 'wolf-pack'
         if: ${{ matrix.os == 'windows-latest' }}
