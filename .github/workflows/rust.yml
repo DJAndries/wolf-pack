@@ -48,9 +48,10 @@ jobs:
       - name: Upload Windows Installer Asset
         id: upload-release-asset 
         if: ${{ matrix.os == 'windows-latest' }}
-        uses: actions/upload-release-asset@v1
+        uses: svenstaro/upload-release-action@v2
         with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./wolf-pack/target/release/WolfPack-Install.exe
-          asset_name: WolfPack-${{ github.ref }}-Install.exe
-          asset_content_type: application/vnd.microsoft.portable-executable
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/release/WolfPack-Install.exe
+          asset_name: WolfPack-${{ github.event.release.tag_name }}-Install.exe
+          tag: ${{ github.event.release.tag_name }}
+          overwrite: true
