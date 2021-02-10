@@ -2563,6 +2563,7 @@ dependencies = [
 name = "wolf-pack"
 version = "0.1.0"
 dependencies = [
+ "backtrace",
  "cubik",
  "derive_more",
  "dirs",

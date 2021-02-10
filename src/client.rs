@@ -5,6 +5,11 @@ use cubik::glium::glutin::event::{Event, WindowEvent, VirtualKeyCode, ElementSta
 use crate::game_client::{GameClient, GameClientError};
 use crate::menu::{MainMenu, MenuResult};
 use crate::settings::Settings;
+use std::panic::set_hook;
+use dirs::home_dir;
+use std::fs::File;
+use std::io::Write;
+use backtrace::Backtrace;
 
 fn new_game(ctr: &mut RenderContainer, menu: &mut MainMenu, host: String, name: String, fps_count_enabled: bool) -> Option<GameClient> {
 	match GameClient::init(ctr, host, name, fps_count_enabled) {
@@ -24,8 +29,33 @@ fn new_game(ctr: &mut RenderContainer, menu: &mut MainMenu, host: String, name: 
 	None
 }
 
+pub fn init_panic_handler() {
+	set_hook(Box::new(|panic_info| {
+		let backtrace = Backtrace::new();
+		let mut crash_dir = home_dir().unwrap();
+		crash_dir.push(".wolfpack.crash");
+		let mut payload = String::new();
+		if let Some(s) = panic_info.payload().downcast_ref::<String>() {
+			payload = s.clone();
+		}
+		if let Some(s) = panic_info.payload().downcast_ref::<&str>() {
+			payload = s.to_string();
+		}
+		payload.push('\n');
+		if let Some(loc) = panic_info.location() {
+			payload.push_str(format!("location: file: {} line: {}\n", loc.file(),
+				loc.line()).as_str());
+		}
+		payload.push_str(format!("{:?}", backtrace).as_str());
+		println!("{}", payload);
+		let mut f = File::create(crash_dir).unwrap();
+		f.write_all(payload.as_bytes()).unwrap();
+	}));
+}
+
 pub fn start_client(fullscreen: bool, host: Option<String>, username: Option<String>, fps_count_enabled: bool, input_switcher_enabled: bool) {
-	let mut settings = Settings::load().unwrap();
+	init_panic_handler();
+	let settings = Settings::load().unwrap();
 
 	let event_loop = EventLoop::new();
 	let mut ctr = RenderContainer::new(&event_loop, settings.resolution[0], settings.resolution[1],
@@ -104,8 +134,7 @@ pub fn start_client(fullscreen: bool, host: Option<String>, username: Option<Str
 						MenuResult::Start { host, name } => {
 							game_client = new_game(&mut ctr, &mut menu, host, name, fps_count_enabled);
 						},
-						MenuResult::SettingsChange(new_settings) => {
-							settings = new_settings;
+						MenuResult::SettingsChange(settings) => {
 							settings.save().unwrap();
 							ctr.update_size_and_mode(settings.resolution[0], settings.resolution[1], !settings.windowed);
 						},
