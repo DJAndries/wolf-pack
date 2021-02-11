@@ -103,20 +103,22 @@ jobs:
           key: ${{ runner.os }}-build
       - name: Install cargo-bundle
         run: cargo install cargo-bundle
+      - name: Set package version
+        run: sed -i -e 's/^version = .*/version = "${{ github.event.release.tag_name }}"/'
       - name: Build and bundle
         run: cargo bundle --release
         working-directory: 'wolf-pack'
       - name: Install create-dmg
         run: npm install create-dmg
       - name: Make DMG image
-        run: ../node_modules/.bin/create-dmg "WolfPack-MacOS-Install.dmg" "wolf-pack/target/release/bundle/osx/Wolf Pack.app"
+        run: ../node_modules/.bin/create-dmg "wolf-pack/target/release/bundle/osx/Wolf Pack ${{ github.event.release.tag_name }}.app"
         working-directory: 'wolf-pack'
       - name: Upload DMG asset
         id: upload-release-asset 
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wolf-pack/WolfPack-MacOS-Install.dmg
+          file: wolf-pack/Wolf Pack ${{ github.event.release.tag_name }}.dmg
           asset_name: WolfPack-${{ github.event.release.tag_name }}-MacOS-Install.dmg
           tag: ${{ github.event.release.tag_name }}
           overwrite: true
