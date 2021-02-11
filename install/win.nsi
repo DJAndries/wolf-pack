@@ -13,7 +13,7 @@
 
 	;Name and file
 	Name "${NAME}"
-	OutFile "..\target\release\WolfPack-Install.exe"
+	OutFile "..\WolfPack-Windows-Install.exe"
 	Unicode True
 
 	;Default installation folder
