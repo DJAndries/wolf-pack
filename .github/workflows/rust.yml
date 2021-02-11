@@ -71,6 +71,7 @@ jobs:
           path: |
             wolf-pack/target
             ~/.cargo/registry
+            ~/.cargo/bin
           key: ${{ runner.os }}-build
       - name: Build
         run: cargo build --release
@@ -97,8 +98,11 @@ jobs:
           path: |
             wolf-pack/target
             ~/.cargo/registry
+            ~/.cargo/bin
             node_modules
           key: ${{ runner.os }}-build
+      - name: Install cargo-bundle
+        run: cargo install cargo-bundle
       - name: Build and bundle
         run: cargo bundle --release
         working-directory: 'wolf-pack'
