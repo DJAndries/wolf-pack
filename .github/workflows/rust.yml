@@ -111,7 +111,7 @@ jobs:
       - name: Install create-dmg
         run: npm install create-dmg
       - name: Make DMG image
-        run: ../node_modules/.bin/create-dmg "wolf-pack/target/release/bundle/osx/Wolf Pack ${{ github.event.release.tag_name }}.app"
+        run: ../node_modules/.bin/create-dmg "wolf-pack/target/release/bundle/osx/Wolf Pack.app"
         working-directory: 'wolf-pack'
       - name: Upload DMG asset
         id: upload-release-asset 
