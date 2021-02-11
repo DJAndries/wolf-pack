@@ -22,7 +22,8 @@ jobs:
           repository: 'djandries/cubik'
           path: 'cubik'
           ref: 'master'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # TODO: Remove token once public
+          token: ${{ secrets.PAT }}
       - name: Cache
         uses: actions/cache@v2
         with:
@@ -60,7 +61,8 @@ jobs:
           repository: 'djandries/cubik'
           path: 'cubik'
           ref: 'master'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # TODO: Remove token once public
+          token: ${{ secrets.PAT }}
       - name: Install alsa lib
         run: sudo apt-get install libasound2-dev
       - name: Cache
@@ -87,7 +89,8 @@ jobs:
           repository: 'djandries/cubik'
           path: 'cubik'
           ref: 'master'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # TODO: Remove token once public
+          token: ${{ secrets.PAT }}
       - name: Cache
         uses: actions/cache@v2
         with:
