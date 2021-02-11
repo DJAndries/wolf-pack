@@ -20,8 +20,8 @@ backtrace = "*"
 opt-level = 2
 
 [package.metadata.bundle]
-name = "ExampleApplication"
-identifier = "com.doe.exampleapplication"
+name = "Wolf Pack"
+identifier = "ca.andries.wolfpack"
 version = "0.1.0"
 resources = ["models", "fonts", "audio", "textures"]
 copyright = "Copyright (c) Darnell Andries"
