@@ -8,12 +8,9 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-#         os: [macos-latest, windows-latest, ubuntu-latest]
-        os: [windows-latest]
+  windows-build:
+    if: false
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
         name: Checkout code
@@ -25,33 +22,94 @@ jobs:
           repository: 'djandries/cubik'
           path: 'cubik'
           ref: 'master'
-          token: ${{ secrets.PAT }}
-      - name: Install alsa lib
-        run: sudo apt-get install libasound2-dev
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache
         uses: actions/cache@v2
         with:
           path: |
             wolf-pack/target
             ~/.cargo/registry
-          key: ${{ matrix.os }}-cargo
+          key: ${{ runner.os }}-build
       - name: Build
         run: cargo build --release
         working-directory: 'wolf-pack'
       - name: Make Windows installer
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: makensis /DVERSION=${{ github.event.release.tag_name }} install\win.nsi
         working-directory: 'wolf-pack'
-        if: ${{ matrix.os == 'windows-latest' }}
       - name: Upload Windows Installer Asset
         id: upload-release-asset 
-        if: ${{ matrix.os == 'windows-latest' }}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wolf-pack/target/release/WolfPack-Install.exe
-          asset_name: WolfPack-${{ github.event.release.tag_name }}-Install.exe
+          file: wolf-pack/WolfPack-Windows-Install.exe
+          asset_name: WolfPack-${{ github.event.release.tag_name }}-Windows-Install.exe
+          tag: ${{ github.event.release.tag_name }}
+          overwrite: true
+          
+  linux-build:
+    runs-on: ubuntu-latest
+    if: false
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+        with:
+          path: 'wolf-pack'
+      - uses: actions/checkout@v2
+        name: Checkout cubik
+        with:
+          repository: 'djandries/cubik'
+          path: 'cubik'
+          ref: 'master'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install alsa lib
+        run: sudo apt-get install libasound2-dev
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            wolf-pack/target
+            ~/.cargo/registry
+          key: ${{ runner.os }}-build
+      - name: Build
+        run: cargo build --release
+        working-directory: 'wolf-pack'
+
+  macos-build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout code
+        with:
+          path: 'wolf-pack'
+      - uses: actions/checkout@v2
+        name: Checkout cubik
+        with:
+          repository: 'djandries/cubik'
+          path: 'cubik'
+          ref: 'master'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            wolf-pack/target
+            ~/.cargo/registry
+            node_modules
+          key: ${{ runner.os }}-build
+      - name: Build and bundle
+        run: cargo bundle --release
+        working-directory: 'wolf-pack'
+      - name: Install create-dmg
+        run: npm install create-dmg
+      - name: Make DMG image
+        run: ../node_modules/.bin/create-dmg WolfPack-MacOS-Install.dmg 'wolf-pack/target/release/bundle/osx/Wolf Pack.app'
+        working-directory: 'wolf-pack'
+      - name: Upload DMG asset
+        id: upload-release-asset 
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: wolf-pack/WolfPack-MacOS-Install.dmg
+          asset_name: WolfPack-${{ github.event.release.tag_name }}-MacOS-Install.dmg
           tag: ${{ github.event.release.tag_name }}
           overwrite: true
