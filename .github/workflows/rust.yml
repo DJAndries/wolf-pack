@@ -105,6 +105,8 @@ jobs:
         run: cargo install cargo-bundle
       - name: Set package version
         run: sed -i -e 's/^version = .*/version = "${{ github.event.release.tag_name }}"/' wolf-pack/Cargo.toml
+      - name: Delete blender models
+        run: find . -name '*.blend' -delete
       - name: Build and bundle
         run: cargo bundle --release
         working-directory: 'wolf-pack'
