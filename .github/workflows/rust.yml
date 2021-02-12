@@ -88,7 +88,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wolf-pack/target/release/bundle/deb/wolf-pack.deb
+          file: wolf-pack/target/release/bundle/deb/wolf-pack_${{ github.event.release.tag_name }}_amd64.deb
           asset_name: WolfPack-${{ github.event.release.tag_name }}-Debian.deb
           tag: ${{ github.event.release.tag_name }}
           overwrite: true
