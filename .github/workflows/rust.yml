@@ -49,7 +49,6 @@ jobs:
           
   linux-build:
     runs-on: ubuntu-latest
-    if: false
     steps:
       - uses: actions/checkout@v2
         name: Checkout code
@@ -63,8 +62,6 @@ jobs:
           ref: 'master'
           # TODO: Remove token once public
           token: ${{ secrets.PAT }}
-      - name: Install alsa lib
-        run: sudo apt-get install libasound2-dev
       - name: Cache
         uses: actions/cache@v2
         with:
@@ -73,12 +70,40 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/bin
           key: ${{ runner.os }}-build
-      - name: Build
-        run: cargo build --release
+      - name: Install alsa lib
+        run: sudo apt-get install libasound2-dev
+      - name: Install cargo-bundle
+        run: cargo install cargo-bundle
+      - name: Set package version
+        run: sed -i -e 's/^version = .*/version = "${{ github.event.release.tag_name }}"/' wolf-pack/Cargo.toml
+      - name: Delete blender models
+        run: find . -name '*.blend' -delete
+      - name: Build and bundle
+        run: cargo bundle --release
         working-directory: 'wolf-pack'
+      - name: Make tarball
+        run: tar -czf wolf-pack.tar.gz ./target/release/wolf-pack models/ fonts/ audio/ textures/
+        working-directory: 'wolf-pack'
+      - name: Upload deb
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: wolf-pack/target/release/bundle/deb/wolf-pack.deb
+          asset_name: WolfPack-${{ github.event.release.tag_name }}-Debian.deb
+          tag: ${{ github.event.release.tag_name }}
+          overwrite: true
+      - name: Upload tarball
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: wolf-pack/wolf-pack.tar.gz
+          asset_name: WolfPack-${{ github.event.release.tag_name }}-Linux.tar.gz
+          tag: ${{ github.event.release.tag_name }}
+          overwrite: true
 
   macos-build:
     runs-on: macos-latest
+    if: false
     steps:
       - uses: actions/checkout@v2
         name: Checkout code
