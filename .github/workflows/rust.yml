@@ -17,7 +17,7 @@ jobs:
         name: Checkout code
       - name: Get version
         id: get-version
-        run: echo "::set-output name=version::$(cat Cargo.toml | grep version | head -n 1 | cut -d'\"' -f2)"
+        run: echo "::set-output name=version::$(cat Cargo.toml | grep version | head -n 1 | cut -d'"' -f2)"
       - name: Create release
         id: create-release
         uses: actions/create-release@v1
