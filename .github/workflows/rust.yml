@@ -54,7 +54,7 @@ jobs:
         run: cargo build --release
         working-directory: 'wolf-pack'
       - name: Make Windows installer
-        run: makensis /DVERSION=${{ jobs.pre-release.outputs.version }} install\win.nsi
+        run: makensis /DVERSION=${{ job.pre-release.outputs.version }} install\win.nsi
         working-directory: 'wolf-pack'
       - name: Upload Windows Installer Asset
         id: upload-release-asset 
@@ -62,8 +62,8 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: wolf-pack/WolfPack-Windows-Install.exe
-          asset_name: WolfPack-${{ jobs.pre-release.outputs.version }}-Windows-Install.exe
-          tag: ${{ jobs.pre-release.outputs.version }}
+          asset_name: WolfPack-${{ job.pre-release.outputs.version }}-Windows-Install.exe
+          tag: ${{ job.pre-release.outputs.version }}
           overwrite: true
           
   linux-build:
@@ -95,7 +95,7 @@ jobs:
       - name: Install cargo-bundle
         run: cargo install cargo-bundle
       - name: Set package version
-        run: sed -i -e 's/^version = .*/version = "${{ jobs.pre-release.outputs.version }}"/' wolf-pack/Cargo.toml
+        run: sed -i -e 's/^version = .*/version = "${{ job.pre-release.outputs.version }}"/' wolf-pack/Cargo.toml
       - name: Delete blender models
         run: find . -name '*.blend' -delete
       - name: Build and bundle
@@ -108,17 +108,17 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wolf-pack/target/release/bundle/deb/wolf-pack_${{ jobs.pre-release.outputs.version }}_amd64.deb
-          asset_name: WolfPack-${{ jobs.pre-release.outputs.version }}-Debian.deb
-          tag: ${{ jobs.pre-release.outputs.version }}
+          file: wolf-pack/target/release/bundle/deb/wolf-pack_${{ job.pre-release.outputs.version }}_amd64.deb
+          asset_name: WolfPack-${{ job.pre-release.outputs.version }}-Debian.deb
+          tag: ${{ job.pre-release.outputs.version }}
           overwrite: true
       - name: Upload tarball
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: wolf-pack/wolf-pack.tar.gz
-          asset_name: WolfPack-${{ jobs.pre-release.outputs.version }}-Linux.tar.gz
-          tag: ${{ jobs.pre-release.outputs.version }}
+          asset_name: WolfPack-${{ job.pre-release.outputs.version }}-Linux.tar.gz
+          tag: ${{ job.pre-release.outputs.version }}
           overwrite: true
 
   macos-build:
@@ -149,7 +149,7 @@ jobs:
       - name: Install cargo-bundle
         run: cargo install cargo-bundle
       - name: Set package version
-        run: sed -i -e 's/^version = .*/version = "${{ jobs.pre-release.outputs.version }}"/' wolf-pack/Cargo.toml
+        run: sed -i -e 's/^version = .*/version = "${{ job.pre-release.outputs.version }}"/' wolf-pack/Cargo.toml
       - name: Delete blender models
         run: find . -name '*.blend' -delete
       - name: Build and bundle
@@ -165,7 +165,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wolf-pack/Wolf Pack ${{ jobs.pre-release.outputs.version }}.dmg
-          asset_name: WolfPack-${{ jobs.pre-release.outputs.version }}-MacOS-Install.dmg
-          tag: ${{ jobs.pre-release.outputs.version }}
+          file: wolf-pack/Wolf Pack ${{ job.pre-release.outputs.version }}.dmg
+          asset_name: WolfPack-${{ job.pre-release.outputs.version }}-MacOS-Install.dmg
+          tag: ${{ job.pre-release.outputs.version }}
           overwrite: true
