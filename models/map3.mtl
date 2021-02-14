@@ -10,8 +10,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
-map_d /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
+map_Kd map3/building03_c.tga
+map_d map3/building03_c.tga
 
 newmtl 06_-_Default.006
 Ns 18.000005
@@ -22,8 +22,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
-map_d /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
+map_Kd map3/building03_c.tga
+map_d map3/building03_c.tga
 
 newmtl 06_-_Default.007
 Ns 18.000005
@@ -34,8 +34,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
-map_d /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
+map_Kd map3/building03_c.tga
+map_d map3/building03_c.tga
 
 newmtl 06_-_Default.008
 Ns 18.000005
@@ -46,8 +46,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
-map_d /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
+map_Kd map3/building03_c.tga
+map_d map3/building03_c.tga
 
 newmtl 06_-_Default.009
 Ns 18.000005
@@ -58,8 +58,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
-map_d /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
+map_Kd map3/building03_c.tga
+map_d map3/building03_c.tga
 
 newmtl 06_-_Default.010
 Ns 18.000005
@@ -70,8 +70,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
-map_d /home/darnell/Work/wolf-pack/models/map3/building03_c.tga
+map_Kd map3/building03_c.tga
+map_d map3/building03_c.tga
 
 newmtl 09_-_Default.001
 Ns 18.000005
@@ -82,7 +82,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building05_c.tga
+map_Kd map3/building05_c.tga
 
 newmtl 09_-_Default.006
 Ns 18.000005
@@ -93,7 +93,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building05_c.tga
+map_Kd map3/building05_c.tga
 
 newmtl 09_-_Default.007
 Ns 18.000005
@@ -104,7 +104,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building05_c.tga
+map_Kd map3/building05_c.tga
 
 newmtl 09_-_Default.008
 Ns 18.000005
@@ -115,7 +115,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building05_c.tga
+map_Kd map3/building05_c.tga
 
 newmtl 09_-_Default.009
 Ns 18.000005
@@ -126,7 +126,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building05_c.tga
+map_Kd map3/building05_c.tga
 
 newmtl 09_-_Default.010
 Ns 18.000005
@@ -137,7 +137,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building05_c.tga
+map_Kd map3/building05_c.tga
 
 newmtl 20_-_Default.001
 Ns 18.000005
@@ -208,7 +208,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/01tizeta_asphalts.png
+map_Kd map3/01tizeta_asphalts.png
 
 newmtl 20_-_Defaulta.006
 Ns 71.999991
@@ -219,7 +219,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/01tizeta_asphalts.png
+map_Kd map3/01tizeta_asphalts.png
 
 newmtl 20_-_Defaulta.007
 Ns 71.999991
@@ -230,7 +230,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/01tizeta_asphalts.png
+map_Kd map3/01tizeta_asphalts.png
 
 newmtl 20_-_Defaulta.008
 Ns 71.999991
@@ -241,7 +241,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/01tizeta_asphalts.png
+map_Kd map3/01tizeta_asphalts.png
 
 newmtl 20_-_Defaulta.009
 Ns 71.999991
@@ -252,7 +252,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/01tizeta_asphalts.png
+map_Kd map3/01tizeta_asphalts.png
 
 newmtl 20_-_Defaulta.010
 Ns 71.999991
@@ -263,7 +263,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/01tizeta_asphalts.png
+map_Kd map3/01tizeta_asphalts.png
 
 newmtl 21_-_Default.001
 Ns 18.000005
@@ -334,7 +334,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building06_c.tga
+map_Kd map3/building06_c.tga
 
 newmtl 3db___building_06.006
 Ns 190.009131
@@ -345,7 +345,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building06_c.tga
+map_Kd map3/building06_c.tga
 
 newmtl 3db___building_06.007
 Ns 190.009131
@@ -356,7 +356,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building06_c.tga
+map_Kd map3/building06_c.tga
 
 newmtl 3db___building_06.008
 Ns 190.009131
@@ -367,7 +367,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building06_c.tga
+map_Kd map3/building06_c.tga
 
 newmtl 3db___building_06.009
 Ns 190.009131
@@ -378,7 +378,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building06_c.tga
+map_Kd map3/building06_c.tga
 
 newmtl 3db___building_06.010
 Ns 190.009131
@@ -389,7 +389,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building06_c.tga
+map_Kd map3/building06_c.tga
 
 newmtl Building_dnt.002
 Ns 18.000005
@@ -400,7 +400,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V02_C.png
+map_Kd map3/Building_V02_C.png
 
 newmtl Building_dnt.007
 Ns 18.000005
@@ -411,7 +411,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V02_C.png
+map_Kd map3/Building_V02_C.png
 
 newmtl Building_dnt.008
 Ns 18.000005
@@ -422,7 +422,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V02_C.png
+map_Kd map3/Building_V02_C.png
 
 newmtl Building_dnt.009
 Ns 18.000005
@@ -433,7 +433,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V02_C.png
+map_Kd map3/Building_V02_C.png
 
 newmtl Building_dnt.010
 Ns 18.000005
@@ -444,7 +444,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V02_C.png
+map_Kd map3/Building_V02_C.png
 
 newmtl Building_dnt.011
 Ns 18.000005
@@ -455,7 +455,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V02_C.png
+map_Kd map3/Building_V02_C.png
 
 newmtl Material
 Ns 225.000000
@@ -466,7 +466,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/playerspawn.png
+map_Kd playerspawn.png
 
 newmtl Material.001
 Ns 225.000000
@@ -477,7 +477,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/playerspawn.png
+map_Kd playerspawn.png
 
 newmtl Material.002
 Ns 225.000000
@@ -488,7 +488,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/playerspawn.png
+map_Kd playerspawn.png
 
 newmtl Material.005
 Ns 225.000000
@@ -499,7 +499,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.010
 Ns 225.000000
@@ -510,7 +510,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.011
 Ns 225.000000
@@ -521,7 +521,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.012
 Ns 225.000000
@@ -532,7 +532,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.013
 Ns 225.000000
@@ -543,7 +543,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.014
 Ns 225.000000
@@ -554,7 +554,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.015
 Ns 225.000000
@@ -565,7 +565,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.016
 Ns 225.000000
@@ -576,7 +576,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.017
 Ns 225.000000
@@ -587,7 +587,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.036
 Ns 225.000000
@@ -598,7 +598,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/light.png
+map_Kd light.png
 
 newmtl Material.037
 Ns 225.000000
@@ -609,7 +609,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/grass.jpg
+map_Kd grass.jpg
 
 newmtl Material.039
 Ns 225.000000
@@ -620,7 +620,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.040
 Ns 225.000000
@@ -631,7 +631,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.041
 Ns 225.000000
@@ -642,7 +642,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.042
 Ns 225.000000
@@ -653,7 +653,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.056
 Ns 225.000000
@@ -664,7 +664,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.057
 Ns 225.000000
@@ -675,7 +675,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.058
 Ns 225.000000
@@ -686,7 +686,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.059
 Ns 225.000000
@@ -697,7 +697,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.060
 Ns 225.000000
@@ -708,7 +708,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.061
 Ns 225.000000
@@ -719,7 +719,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.062
 Ns 225.000000
@@ -730,7 +730,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.063
 Ns 225.000000
@@ -741,7 +741,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.064
 Ns 225.000000
@@ -752,7 +752,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/light.png
+map_Kd light.png
 
 newmtl Material.065
 Ns 225.000000
@@ -763,7 +763,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.066
 Ns 225.000000
@@ -774,7 +774,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.067
 Ns 225.000000
@@ -785,7 +785,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.068
 Ns 225.000000
@@ -796,7 +796,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.069
 Ns 225.000000
@@ -807,7 +807,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.070
 Ns 225.000000
@@ -818,7 +818,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.071
 Ns 225.000000
@@ -829,7 +829,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.072
 Ns 225.000000
@@ -840,7 +840,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.074
 Ns 225.000000
@@ -851,7 +851,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.075
 Ns 225.000000
@@ -862,7 +862,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.076
 Ns 225.000000
@@ -873,7 +873,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.077
 Ns 225.000000
@@ -884,7 +884,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.078
 Ns 225.000000
@@ -895,7 +895,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.079
 Ns 225.000000
@@ -906,7 +906,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.080
 Ns 225.000000
@@ -917,7 +917,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.081
 Ns 225.000000
@@ -928,7 +928,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.082
 Ns 225.000000
@@ -939,7 +939,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.083
 Ns 225.000000
@@ -950,7 +950,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.084
 Ns 225.000000
@@ -961,7 +961,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.085
 Ns 225.000000
@@ -972,7 +972,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.086
 Ns 225.000000
@@ -983,7 +983,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.087
 Ns 225.000000
@@ -994,7 +994,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.088
 Ns 225.000000
@@ -1005,7 +1005,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.089
 Ns 225.000000
@@ -1016,7 +1016,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.090
 Ns 225.000000
@@ -1027,7 +1027,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.091
 Ns 225.000000
@@ -1038,7 +1038,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.092
 Ns 225.000000
@@ -1049,7 +1049,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/packspawn.png
+map_Kd packspawn.png
 
 newmtl Material.093
 Ns 225.000000
@@ -1060,7 +1060,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/light.png
+map_Kd light.png
 
 newmtl Material.094
 Ns 225.000000
@@ -1071,7 +1071,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.095
 Ns 225.000000
@@ -1082,7 +1082,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.096
 Ns 225.000000
@@ -1093,7 +1093,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.097
 Ns 225.000000
@@ -1104,7 +1104,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.098
 Ns 225.000000
@@ -1115,7 +1115,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.099
 Ns 225.000000
@@ -1126,7 +1126,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.100
 Ns 225.000000
@@ -1137,7 +1137,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.101
 Ns 225.000000
@@ -1148,7 +1148,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.102
 Ns 225.000000
@@ -1159,7 +1159,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material.103
 Ns 225.000000
@@ -1170,7 +1170,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd /home/darnell/Work/wolf-pack/models/bricks2.jpg
+map_Kd bricks2.jpg
 
 newmtl Material_#0.001
 Ns 18.000005
@@ -1181,7 +1181,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V01_C.png
+map_Kd map3/Building_V01_C.png
 
 newmtl Material_#0.006
 Ns 18.000005
@@ -1192,7 +1192,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V01_C.png
+map_Kd map3/Building_V01_C.png
 
 newmtl Material_#0.007
 Ns 18.000005
@@ -1203,7 +1203,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V01_C.png
+map_Kd map3/Building_V01_C.png
 
 newmtl Material_#0.008
 Ns 18.000005
@@ -1214,7 +1214,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V01_C.png
+map_Kd map3/Building_V01_C.png
 
 newmtl Material_#0.009
 Ns 18.000005
@@ -1225,7 +1225,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V01_C.png
+map_Kd map3/Building_V01_C.png
 
 newmtl Material_#0.010
 Ns 18.000005
@@ -1236,7 +1236,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/Building_V01_C.png
+map_Kd map3/Building_V01_C.png
 
 newmtl building_025.002
 Ns 18.000005
@@ -1247,7 +1247,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_025_c.tga
+map_Kd map3/building_025_c.tga
 
 newmtl building_025.007
 Ns 18.000005
@@ -1258,7 +1258,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_025_c.tga
+map_Kd map3/building_025_c.tga
 
 newmtl building_025.008
 Ns 18.000005
@@ -1269,7 +1269,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_025_c.tga
+map_Kd map3/building_025_c.tga
 
 newmtl building_025.009
 Ns 18.000005
@@ -1280,7 +1280,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_025_c.tga
+map_Kd map3/building_025_c.tga
 
 newmtl building_025.010
 Ns 18.000005
@@ -1291,7 +1291,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_025_c.tga
+map_Kd map3/building_025_c.tga
 
 newmtl building_025.011
 Ns 18.000005
@@ -1302,7 +1302,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_025_c.tga
+map_Kd map3/building_025_c.tga
 
 newmtl building_16.002
 Ns 18.000005
@@ -1313,7 +1313,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_016_c.tga
+map_Kd map3/building_016_c.tga
 
 newmtl building_16.007
 Ns 18.000005
@@ -1324,7 +1324,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_016_c.tga
+map_Kd map3/building_016_c.tga
 
 newmtl building_16.008
 Ns 18.000005
@@ -1335,7 +1335,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_016_c.tga
+map_Kd map3/building_016_c.tga
 
 newmtl building_16.009
 Ns 18.000005
@@ -1346,7 +1346,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_016_c.tga
+map_Kd map3/building_016_c.tga
 
 newmtl building_16.010
 Ns 18.000005
@@ -1357,7 +1357,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_016_c.tga
+map_Kd map3/building_016_c.tga
 
 newmtl building_16.011
 Ns 18.000005
@@ -1368,7 +1368,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building_016_c.tga
+map_Kd map3/building_016_c.tga
 
 newmtl collision
 Ns 225.000000
@@ -1379,7 +1379,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl collision.001
 Ns 225.000000
@@ -1390,7 +1390,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl collision.002
 Ns 225.000000
@@ -1401,7 +1401,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl collision.003
 Ns 225.000000
@@ -1412,7 +1412,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl collision.004
 Ns 225.000000
@@ -1423,7 +1423,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl collision.005
 Ns 225.000000
@@ -1434,7 +1434,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl collision.006
 Ns 225.000000
@@ -1445,7 +1445,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl collision.007
 Ns 225.000000
@@ -1456,7 +1456,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 0.106383
 illum 9
-map_Kd /home/darnell/Work/wolf-pack/models/collision.png
+map_Kd collision.png
 
 newmtl mat1.006
 Ns 96.078443
@@ -1667,7 +1667,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building01_c.tga
+map_Kd map3/building01_c.tga
 
 newmtl orig_orig_orig_17_-_Default.006
 Ns 900.000000
@@ -1678,7 +1678,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building01_c.tga
+map_Kd map3/building01_c.tga
 
 newmtl orig_orig_orig_17_-_Default.007
 Ns 900.000000
@@ -1689,7 +1689,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building01_c.tga
+map_Kd map3/building01_c.tga
 
 newmtl orig_orig_orig_17_-_Default.008
 Ns 900.000000
@@ -1700,7 +1700,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building01_c.tga
+map_Kd map3/building01_c.tga
 
 newmtl orig_orig_orig_17_-_Default.009
 Ns 900.000000
@@ -1711,7 +1711,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building01_c.tga
+map_Kd map3/building01_c.tga
 
 newmtl orig_orig_orig_17_-_Default.010
 Ns 900.000000
@@ -1722,4 +1722,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd /home/darnell/Work/wolf-pack/models/map3/building01_c.tga
+map_Kd map3/building01_c.tga

@@ -1,7 +1,7 @@
 [package]
 name = "wolf-pack"
 description = "Blah blah"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Darnell Andries <darnell@andries.ca>"]
 edition = "2018"
 
@@ -22,7 +22,7 @@ opt-level = 2
 [package.metadata.bundle]
 name = "Wolf Pack"
 identifier = "ca.andries.wolfpack"
-version = "0.1.0"
+version = "0.1.1"
 resources = ["models", "fonts", "audio", "textures"]
 copyright = "Copyright (c) Darnell Andries"
 category = "Developer Tool"
