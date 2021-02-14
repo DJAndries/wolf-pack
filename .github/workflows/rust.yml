@@ -93,7 +93,7 @@ jobs:
       - name: Install alsa lib
         run: sudo apt-get install libasound2-dev
       - name: Install cargo-bundle
-        run: cargo install cargo-bundle
+        run: cargo install cargo-bundle || true
       - name: Set package version
         run: sed -i -e 's/^version = .*/version = "${{ needs.pre-release.outputs.version }}"/' wolf-pack/Cargo.toml
       - name: Delete blender models
@@ -147,7 +147,7 @@ jobs:
             node_modules
           key: ${{ runner.os }}-build
       - name: Install cargo-bundle
-        run: cargo install cargo-bundle
+        run: cargo install cargo-bundle || true
       - name: Set package version
         run: sed -i -e 's/^version = .*/version = "${{ needs.pre-release.outputs.version }}"/' wolf-pack/Cargo.toml
       - name: Delete blender models
