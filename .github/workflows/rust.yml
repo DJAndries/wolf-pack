@@ -95,6 +95,7 @@ jobs:
       - name: Install cargo-bundle
         run: cargo install cargo-bundle
       - name: Set package version
+        run: sed -i -e 's/^version = .*/version = "${{ needs.pre-release.outputs.version }}"/' wolf-pack/Cargo.toml
       - name: Delete blender models
         run: find . -name '*.blend' -delete
       - name: Build and bundle
